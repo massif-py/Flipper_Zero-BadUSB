@@ -1,0 +1,36 @@
+REM Author: massif.
+REM Description: Change Windows wallpaper.
+REM Version: 1.0
+GUI r
+DELAY 1000
+STRING PowerShell
+ENTER
+DELAY 5000
+REM Change the URL to the image you want to download.
+STRING $url = "https://scontent.fmid2-1.fna.fbcdn.net/v/t39.30808-6/402271429_722906749869187_3051722721339352165_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=kf33XSJ-bE8AX8Wq0pl&_nc_oc=AQkGn1yiajJme1Yo99dSHVsEtyCa8s89fdtELGqEUUXX5wYdy8FV5wJ7dtZfo7Vu8kM&_nc_ht=scontent.fmid2-1.fna&oh=00_AfB44pFroI1PVUBKveXT-Kt3-cH2hUKieE4zzfW37CIeag&oe=658E7A0C"
+ENTER
+DELAY 1000
+STRING $dl = "$env:USERPROFILE\Downloads\img.jpg"
+ENTER
+DELAY 1000
+STRING Invoke-WebRequest -Uri $url -OutFile $dl
+ENTER
+DELAY 1000
+STRING $SPI_SETDESKWALLPAPER = 0x0014
+ENTER
+DELAY 1000
+STRING $SPIF_UPDATEINIFILE = 0x01
+ENTER
+DELAY 1000
+STRING $SPIF_SENDCHANGE = 0x02
+ENTER
+DELAY 1000
+STRING Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class wp {[DllImport("user32.dll", CharSet = CharSet.Auto)]public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);}'
+ENTER
+DELAY 1000
+STRING [wp]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $dl, $SPIF_UPDATEINIFILE -bor $SPIF_SENDCHANGE)
+ENTER
+DELAY 1000
+STRING exit
+ENTER
+
