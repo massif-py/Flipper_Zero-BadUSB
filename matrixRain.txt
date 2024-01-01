@@ -1,0 +1,11 @@
+DELAY 1000
+GUI r
+DELAY 1000
+STRING cmd
+ENTER
+DELAY 1000
+STRING rundll32 url.dll,FileProtocolHandler https://freaky.mx/matrixCanvas.html
+ENTER
+DELAY 1000
+F11
+F5
